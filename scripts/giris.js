@@ -33,7 +33,7 @@ class homeGame extends Phaser.Scene {
     
     preload() {
         
-
+        this.load.image("baslat", "assets/baslat.png");
     }
 
     create() {
@@ -56,9 +56,9 @@ class homeGame extends Phaser.Scene {
         });
 
 
-        this.baslamaText=this.add.text(game.config.width/2, game.config.height/2, 'BAŞLA', { fontFamily: '"Press Start 2P",cursive',fontSize:'25px' });
-        this.baslamaText.setInteractive().on('pointerdown', function() {
-            //Let's start another scene with start
+        this.baslat = this.physics.add.sprite(game.config.width/2,game.config.height/2, "baslat");
+        
+        this.baslat.setInteractive().on('pointerdown', function() {
             this.scene.scene.start('PlayGame');
         });
         
