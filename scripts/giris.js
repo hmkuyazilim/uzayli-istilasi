@@ -17,7 +17,7 @@ window.onload = function () {
                 debug: false,
             }
         },
-        scene: [homeGame,playGame]
+        scene: [homeGame,boss1Game]
     }
    
     game = new Phaser.Game(gameConfig);
@@ -59,7 +59,7 @@ class homeGame extends Phaser.Scene {
         this.baslat = this.physics.add.sprite(game.config.width/2,game.config.height/2, "baslat");
         
         this.baslat.setInteractive().on('pointerdown', function() {
-            this.scene.scene.start('PlayGame');
+            this.scene.scene.start('Boss1Game');
         });
         
     }

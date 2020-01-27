@@ -4,9 +4,9 @@ let atesHak=tankNesnesi.sarjor;
 let uzayliSayaci=0;
 
 
-class playGame extends Phaser.Scene {
+class play1Game extends Phaser.Scene {
     constructor() {
-        super('PlayGame');
+        super('Play1Game');
     }
 
     preload() {
@@ -109,7 +109,7 @@ class playGame extends Phaser.Scene {
                 uzayliText.text=uzayliSayaci;
                 atesHak=tankNesnesi.sarjor;
                 mermiText.text=atesHak;
-                sahne.start('PlayGame');
+                sahne.start('HomeGame');
                 
             }
             
