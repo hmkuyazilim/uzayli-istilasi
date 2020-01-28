@@ -45,6 +45,7 @@ class homeGame extends Phaser.Scene {
         this.baslat.setInteractive().on('pointerdown', function() {
             this.scene.scene.start('SahneGecisGame');
         });
+        this.girişText=this.add.text(game.config.width / 2, game.config.height/ 2, '', { fontFamily: '"Press Start 2P",cursive',fontSize:'20px' });
         
     }
 

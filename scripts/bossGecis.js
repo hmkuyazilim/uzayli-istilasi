@@ -22,7 +22,7 @@ class bossGecisGame extends Phaser.Scene {
                 bossNesnesi.bossBilgileriniGuncelle(b.atesAraligi,b.bossHiz,b.guc,b.mermiHiz);
         });
 
-        console.log(bossNesnesi);
+        
         
 
         
@@ -53,7 +53,7 @@ class bossGecisGame extends Phaser.Scene {
             x:game.config.width/ 2,
             y:50,
             ease: 'Linear',
-            duration: 5000,
+            duration: 2000,
             yoyo: false,
             repeat:0,
             onComplete:function(){

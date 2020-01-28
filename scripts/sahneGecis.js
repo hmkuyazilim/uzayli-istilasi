@@ -34,7 +34,8 @@ class sahneGecisGame extends Phaser.Scene {
 
         
 
-        
+        this.sahneText=this.add.text(game.config.width / 4, game.config.height/ 2, 'Sahne 1', { fontFamily: '"Press Start 2P",cursive',fontSize:'20px' });
+        this.sahneText.text='SAHNE 1';
         this.tank = this.physics.add.sprite(game.config.width / 2,game.config.height+100, "tank");
         
 
@@ -59,7 +60,7 @@ class sahneGecisGame extends Phaser.Scene {
             x:game.config.width/ 2,
             y:game.config.height-25,
             ease: 'Linear',
-            duration: 5000,
+            duration: 2000,
             yoyo: false,
             repeat:0,
             onComplete:function(){

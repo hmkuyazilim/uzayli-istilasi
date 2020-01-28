@@ -38,7 +38,7 @@ class play1Game extends Phaser.Scene {
         uzayliAnimasyonuOlustur(this.anims,'uzayli','uzayli',0,7,15);
         patlamaEfektiOlustur(this.anims,'patlama','patlama',0,12,50);
 
-        this.tank = this.physics.add.sprite(200,game.config.height-25, "tank");
+        this.tank = this.physics.add.sprite(game.config.width/ 2,game.config.height-25, "tank");
         this.tank.setCollideWorldBounds(true);
         this.input.on("pointerdown", this.tankHareketEt, this);
         this.input.on("pointerup", this.tankDur, this);
@@ -121,7 +121,17 @@ class play1Game extends Phaser.Scene {
         this.physics.add.overlap(this.mermi, this.uzayliGrup,this.uzayliYokEt,null,this);
 
         if(uzayliSayaci==sahneNesnesi.uzayliSayisi){
+                this.tweenOlustur();
+                
+            
+            
+        }
+
+        if (tweenKontrol==1)
+        {
+            tweenKontrol=0;
             sahne.start('BossGecisGame');
+    
         }
         
 
@@ -139,6 +149,22 @@ class play1Game extends Phaser.Scene {
         mermi.disableBody(true, true);
         uzayliSayaci++;
         this.uzayliText.text=uzayliSayaci;
+    }
+
+    tweenOlustur(){
+        tween=this.tweens.add({
+            targets: this.tank,
+            x:game.config.width/ 2,
+            y:game.config.height-25,
+            ease: 'Linear',
+            duration: 1000,
+            yoyo: false,
+            repeat:0,
+            onComplete:function(){
+                tweenKontrol=1;
+                
+            }
+        });
     }
 
     
