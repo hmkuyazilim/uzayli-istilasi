@@ -17,7 +17,7 @@ window.onload = function () {
                 debug: false,
             }
         },
-        scene: [homeGame,play1Game,bossGecisGame,boss1Game]
+        scene: [homeGame,sahneGecisGame,play1Game,bossGecisGame,boss1Game]
     }
    
     game = new Phaser.Game(gameConfig);
@@ -37,29 +37,13 @@ class homeGame extends Phaser.Scene {
     }
 
     create() {
-        const resTank=db.collection('tanklar').doc('tank1');
-        resTank.get().then((veri)=>{
-                let v=veri.data();
-                tankNesnesi.tankBilgileriniGuncelle(v.tankHiz,v.mermiHiz,v.sarjor,v.mermiBekleme);
-        });
-
-        const resUzayli=db.collection('uzaylilar').doc('uzayli1');
-        resUzayli.get().then((veri)=>{
-                let u=veri.data();
-                uzayliNesnesi.uzayliBilgileriniGuncelle(u.uzayliHiz);
-        });
-
-        const resSahne=db.collection('sahneler').doc('sahne1');
-        resSahne.get().then((veri)=>{
-                let s=veri.data();
-                sahneNesnesi.sahneBilgileriniGuncelle(s.uzayliSayisi);
-        });
+        
 
 
         this.baslat = this.physics.add.sprite(game.config.width/2,game.config.height/2, "baslat");
         
         this.baslat.setInteractive().on('pointerdown', function() {
-            this.scene.scene.start('Play1Game');
+            this.scene.scene.start('SahneGecisGame');
         });
         
     }

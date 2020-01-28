@@ -16,7 +16,11 @@ class boss1Game extends Phaser.Scene {
         );
         this.load.image("tank", "assets/tank.png");
         this.load.image("mermi", "assets/mermi.png");
-        this.load.image("boss", "assets/boss1.png");
+        // this.load.spritesheet('boss', 
+        //     'assets/boss1.png',
+        //     { frameWidth: 100, frameHeight: 100}
+        // );
+        this.load.image("boss", "assets/boss.png");
         this.load.image("bossMermi", "assets/boss_mermi.png");
     }
 
@@ -130,6 +134,7 @@ class boss1Game extends Phaser.Scene {
         this.patlama = this.physics.add.sprite(tank.x,tank.y, "patlama");
         
         this.patlama.anims.play('patlama', true);
+        
         
         //console.log(this.uzayliGrup.getLength());
         mermi.disableBody(true, true);
