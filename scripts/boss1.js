@@ -17,7 +17,7 @@ class boss1Game extends Phaser.Scene {
         this.load.image("tank", "assets/tank.png");
         this.load.image("mermi", "assets/mermi.png");
         this.load.image("boss", "assets/boss1.png");
-
+        this.load.image("bossMermi", "assets/boss_mermi.png");
     }
 
     create() {
@@ -27,6 +27,7 @@ class boss1Game extends Phaser.Scene {
 
         this.tank = this.physics.add.sprite(200,game.config.height-25, "tank");
         this.boss = this.physics.add.sprite(game.config.width/ 2,50, "boss");
+        this.atesZaman=0;
 
         this.tank.setCollideWorldBounds(true);
         this.boss.setCollideWorldBounds(true);
@@ -85,14 +86,23 @@ class boss1Game extends Phaser.Scene {
 
     
     
-    update() {
+    update(totalTime, deltaTime) {
+        if(totalTime>this.atesZaman){
+           this.atesZaman=totalTime+5000;
+           this.bossMermi = this.physics.add.sprite(this.boss.x,this.boss.getBounds().bottom, "bossMermi");
+           this.bossMermi.setVelocityY(100);
+
+        }
+       
+        
+        
         let tank=this.tank;
         let sahne=this.scene;
         let bossText=this.bossText;
         let mermiText=this.mermiText;
          
         this.physics.add.overlap(this.mermi, this.boss,this.bossVur,null,this);
-        
+        this.physics.add.overlap(this.bossMermi, this.tank,this.tankVur,null,this);
         if (tweenKontrol==1)
         {
             tweenKontrol=0;
@@ -112,13 +122,29 @@ class boss1Game extends Phaser.Scene {
         this.bossText.text=bossSayaci;
     }
 
+    tankVur(mermi,tank){
+        let sahne=this.scene;
+        this.patlama = this.physics.add.sprite(tank.x,tank.y, "patlama");
+        
+        this.patlama.anims.play('patlama', true);
+        
+        //console.log(this.uzayliGrup.getLength());
+        mermi.disableBody(true, true);
+        tank.disableBody(true, true);
+        bossSayaci--;
+        this.bossText.text=bossSayaci;
+        setTimeout(()=>{
+            sahne.start('HomeGame');
+        },500)
+        
+    }
     tweenOlustur(){
         tween=this.tweens.add({
             targets: this.boss,
             x:Phaser.Math.Between(0,game.config.width),
             y:Phaser.Math.Between(0,game.config.height/4),
             ease: 'Linear',
-            duration: 5000,
+            duration: 3000,
             yoyo: true,
             repeat:0,
             onComplete:function(){
