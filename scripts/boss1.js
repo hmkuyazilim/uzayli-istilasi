@@ -21,7 +21,8 @@ class boss1Game extends Phaser.Scene {
     }
 
     create() {
-        
+        bossSayaci=100;
+        atesHak=tankNesnesi.sarjor;
         
         patlamaEfektiOlustur(this.anims,'patlama','patlama',0,12,50);
 
@@ -131,8 +132,6 @@ class boss1Game extends Phaser.Scene {
         //console.log(this.uzayliGrup.getLength());
         mermi.disableBody(true, true);
         tank.disableBody(true, true);
-        bossSayaci--;
-        this.bossText.text=bossSayaci;
         setTimeout(()=>{
             sahne.start('HomeGame');
         },500)
