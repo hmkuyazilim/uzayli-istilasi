@@ -16,6 +16,15 @@ class bossGecisGame extends Phaser.Scene {
 
     create() {
 
+        const resBoss=db.collection('bosslar').doc('boss1');
+        resBoss.get().then((veri)=>{
+                let b=veri.data();
+                bossNesnesi.bossBilgileriniGuncelle(b.atesAraligi,b.bossHiz,b.guc,b.mermiHiz);
+        });
+
+        console.log(bossNesnesi);
+        
+
         
         this.tank = this.physics.add.sprite(game.config.width / 2,game.config.height-25, "tank");
         this.boss = this.physics.add.sprite(game.config.width / 2,-200, "boss");

@@ -1,5 +1,5 @@
 var game;
-let bossSayaci=100;
+let bossSayaci=bossNesnesi.guc;//guç
 var tween;
 var tweenKontrol=0;
 
@@ -21,7 +21,7 @@ class boss1Game extends Phaser.Scene {
     }
 
     create() {
-        bossSayaci=100;
+        bossSayaci=bossNesnesi.guc;
         atesHak=tankNesnesi.sarjor;
         
         patlamaEfektiOlustur(this.anims,'patlama','patlama',0,12,50);
@@ -89,9 +89,11 @@ class boss1Game extends Phaser.Scene {
     
     update(totalTime, deltaTime) {
         if(totalTime>this.atesZaman){
-           this.atesZaman=totalTime+5000;
+            console.log(bossNesnesi.atesAraligi);
+            
+           this.atesZaman=totalTime+bossNesnesi.atesAraligi;//ateş aralığı
            this.bossMermi = this.physics.add.sprite(this.boss.x,this.boss.getBounds().bottom, "bossMermi");
-           this.bossMermi.setVelocityY(100);
+           this.bossMermi.setVelocityY(bossNesnesi.mermiHiz);//mermi hiz
 
         }
        
@@ -143,7 +145,7 @@ class boss1Game extends Phaser.Scene {
             x:Phaser.Math.Between(0,game.config.width),
             y:Phaser.Math.Between(0,game.config.height/4),
             ease: 'Linear',
-            duration: 3000,
+            duration: bossNesnesi.bossHiz,//boss hız
             yoyo: true,
             repeat:0,
             onComplete:function(){
