@@ -26,7 +26,7 @@ class boss1Game extends Phaser.Scene {
         
         patlamaEfektiOlustur(this.anims,'patlama','patlama',0,12,50);
 
-        this.tank = this.physics.add.sprite(200,game.config.height-25, "tank");
+        this.tank = this.physics.add.sprite(game.config.width / 2,game.config.height-25, "tank");
         this.boss = this.physics.add.sprite(game.config.width/ 2,50, "boss");
         this.atesZaman=0;
 

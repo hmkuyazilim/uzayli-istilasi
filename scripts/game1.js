@@ -24,6 +24,8 @@ class play1Game extends Phaser.Scene {
     }
 
     create() {
+        atesHak=tankNesnesi.sarjor;
+        uzayliSayaci=0;
         
             
         this.uzayliGrup = this.physics.add.group();
@@ -118,6 +120,9 @@ class play1Game extends Phaser.Scene {
 
         this.physics.add.overlap(this.mermi, this.uzayliGrup,this.uzayliYokEt,null,this);
 
+        if(uzayliSayaci==sahneNesnesi.uzayliSayisi){
+            sahne.start('BossGecisGame');
+        }
         
 
     }
