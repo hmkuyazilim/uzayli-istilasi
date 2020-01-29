@@ -10,8 +10,11 @@ class play1Game extends Phaser.Scene {
     }
 
     preload() {
+        console.log(sahneNesnesi);
+        console.log(uzayliNesnesi);
+        
         this.load.spritesheet('uzayli', 
-            'assets/uzayli.png',
+            'assets/'+sahneNesnesi.uzayliTip+'.png',
             { frameWidth: 32, frameHeight: 32 }
         );
         this.load.spritesheet('patlama', 
@@ -122,9 +125,7 @@ class play1Game extends Phaser.Scene {
 
         if(uzayliSayaci==sahneNesnesi.uzayliSayisi){
                 this.tweenOlustur();
-                
-            
-            
+             
         }
 
         if (tweenKontrol==1)

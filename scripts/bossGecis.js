@@ -11,16 +11,31 @@ class bossGecisGame extends Phaser.Scene {
         
         
         this.load.image("tank", "assets/tank.png");
-        this.load.image("boss", "assets/boss.png");
+        this.load.image("boss", "assets/"+sahneNesnesi.bossTip+".png");
     }
 
     create() {
 
-        const resBoss=db.collection('bosslar').doc('boss1');
-        resBoss.get().then((veri)=>{
+        if(localStorage.getItem('sahne')){
+            this.sahneBilgisi=localStorage.getItem('sahne');
+        }
+        else{
+            this.sahneBilgisi="1";
+        }
+
+        const resSahne=db.collection('sahneler').doc('sahne'+this.sahneBilgisi);
+        resSahne.get().then((veri)=>{
+                let s=veri.data();
+                sahneNesnesi.sahneBilgileriniGuncelle(s.uzayliSayisi,s.bossTip,s.uzayliTip);
+
+                const resBoss=db.collection('bosslar').doc(s.bossTip);
+                resBoss.get().then((veri)=>{
                 let b=veri.data();
                 bossNesnesi.bossBilgileriniGuncelle(b.atesAraligi,b.bossHiz,b.guc,b.mermiHiz);
+            });
         });
+
+        
 
         
         

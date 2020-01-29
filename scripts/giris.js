@@ -38,8 +38,6 @@ class homeGame extends Phaser.Scene {
 
     create() {
         
-
-
         this.baslat = this.physics.add.sprite(game.config.width/2,game.config.height/2, "baslat");
         
         this.baslat.setInteractive().on('pointerdown', function() {

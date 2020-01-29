@@ -20,13 +20,16 @@ class boss1Game extends Phaser.Scene {
         //     'assets/boss1.png',
         //     { frameWidth: 100, frameHeight: 100}
         // );
-        this.load.image("boss", "assets/boss.png");
+        this.load.image("boss", "assets/"+sahneNesnesi.bossTip+".png");
         this.load.image("bossMermi", "assets/boss_mermi.png");
     }
 
     create() {
         bossSayaci=bossNesnesi.guc;
         atesHak=tankNesnesi.sarjor;
+        console.log(sahneNesnesi.bossTip);
+        
+        
         
         patlamaEfektiOlustur(this.anims,'patlama','patlama',0,12,50);
 
@@ -115,6 +118,15 @@ class boss1Game extends Phaser.Scene {
             tweenKontrol=0;
             this.tweenOlustur();
     
+        }
+
+        if(bossSayaci<=0){
+             sahne.start('HomeGame');
+             location.reload(); 
+            let sahneBilgisi=localStorage.getItem('sahne');
+            sahneBilgisi++;
+            localStorage.setItem('sahne',sahneBilgisi);
+         
         }
     }
 
