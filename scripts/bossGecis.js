@@ -31,7 +31,7 @@ class bossGecisGame extends Phaser.Scene {
                 const resBoss=db.collection('bosslar').doc(s.bossTip);
                 resBoss.get().then((veri)=>{
                 let b=veri.data();
-                bossNesnesi.bossBilgileriniGuncelle(b.atesAraligi,b.bossHiz,b.guc,b.mermiHiz);
+                bossNesnesi.bossBilgileriniGuncelle(b.atesAraligi,b.bossHiz,b.guc,b.mermiHiz,b.mermiTip);
             });
         });
 

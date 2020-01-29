@@ -21,13 +21,13 @@ class boss1Game extends Phaser.Scene {
         //     { frameWidth: 100, frameHeight: 100}
         // );
         this.load.image("boss", "assets/"+sahneNesnesi.bossTip+".png");
-        this.load.image("bossMermi", "assets/boss_mermi.png");
+        this.load.image("bossMermi", "assets/"+bossNesnesi.mermiTip+".png");
     }
 
     create() {
         bossSayaci=bossNesnesi.guc;
         atesHak=tankNesnesi.sarjor;
-        console.log(sahneNesnesi.bossTip);
+        console.log(bossNesnesi.mermiTip);
         
         
         
