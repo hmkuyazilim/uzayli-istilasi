@@ -50,6 +50,8 @@ class homeGame extends Phaser.Scene {
                     let o=veri.data();
                     oyuncuNesnesi.oyuncuBilgileriniGuncelle(o.para,o.sahne,o.tankTip);
 
+                    localStorage.setItem('sahne',o.sahne);
+
                     const resTank=db.collection('tanklar').doc(o.tankTip);
                     resTank.get().then((veri)=>{
                     let v=veri.data();

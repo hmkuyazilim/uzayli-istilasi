@@ -9,11 +9,12 @@ class sahneGecisGame extends Phaser.Scene {
 
     preload() {
         
-        this.load.image("tank", "assets/"+oyuncuNesnesi.tankTip+".png");
+        this.load.image("tank1", "assets/tank.png");
     }
 
     create() {
         //location.reload(); 
+        
         if(localStorage.getItem('sahne')){
             this.sahneBilgisi=localStorage.getItem('sahne');
         }
@@ -39,7 +40,7 @@ class sahneGecisGame extends Phaser.Scene {
 
         this.sahneText=this.add.text(game.config.width / 4, game.config.height/ 2, 'Sahne '+this.sahneBilgisi, { fontFamily: '"Press Start 2P",cursive',fontSize:'20px' });
         this.sahneText.text='SAHNE '+this.sahneBilgisi;
-        this.tank = this.physics.add.sprite(game.config.width / 2,game.config.height+100, "tank");
+        this.tank1 = this.physics.add.sprite(game.config.width / 2,game.config.height+100, "tank1");
         
 
         
@@ -60,7 +61,7 @@ class sahneGecisGame extends Phaser.Scene {
     }
     tweenOlustur(){
         tween=this.tweens.add({
-            targets: this.tank,
+            targets: this.tank1,
             x:game.config.width/ 2,
             y:game.config.height-25,
             ease: 'Linear',

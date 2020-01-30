@@ -2,6 +2,7 @@ var game;
 let bossSayaci=bossNesnesi.guc;//guç
 var tween;
 var tweenKontrol=0;
+var bossSayaciKontrol=0;
 
 class boss1Game extends Phaser.Scene {
     constructor() {
@@ -121,11 +122,21 @@ class boss1Game extends Phaser.Scene {
         }
 
         if(bossSayaci<=0){
-             sahne.start('HomeGame');
-             location.reload(); 
-            let sahneBilgisi=localStorage.getItem('sahne');
-            sahneBilgisi++;
-            localStorage.setItem('sahne',sahneBilgisi);
+            
+            if(bossSayaciKontrol==0){
+                bossSayaciKontrol=1;
+                let sahneBilgisi=localStorage.getItem('sahne');
+                sahneBilgisi++;
+                localStorage.setItem('sahne',sahneBilgisi);
+                
+                db.collection('oyuncular').doc(auth.currentUser.uid).update({
+                    sahne:sahneBilgisi
+                }).then(function() {
+                    sahne.start('HomeGame');
+                    location.reload(); 
+                    
+                })
+            }
          
         }
     }
