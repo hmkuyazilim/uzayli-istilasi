@@ -3,6 +3,7 @@ let bossSayaci=bossNesnesi.guc;//guç
 var tween;
 var tweenKontrol=0;
 var bossSayaciKontrol=0;
+var para;
 
 class boss1Game extends Phaser.Scene {
     constructor() {
@@ -28,8 +29,7 @@ class boss1Game extends Phaser.Scene {
     create() {
         bossSayaci=bossNesnesi.guc;
         atesHak=tankNesnesi.sarjor;
-        console.log(bossNesnesi.mermiTip);
-        
+        para=oyuncuNesnesi.para;
         
         
         patlamaEfektiOlustur(this.anims,'patlama','patlama',0,12,50);
@@ -128,14 +128,15 @@ class boss1Game extends Phaser.Scene {
                 let sahneBilgisi=localStorage.getItem('sahne');
                 sahneBilgisi++;
                 localStorage.setItem('sahne',sahneBilgisi);
-                
                 db.collection('oyuncular').doc(auth.currentUser.uid).update({
+                    para:para,
                     sahne:sahneBilgisi
-                }).then(function() {
-                    sahne.start('HomeGame');
-                    location.reload(); 
-                    
-                })
+                }).then(()=>{
+                     sahne.start('HomeGame');
+                        location.reload(); 
+                       
+                }) 
+                
             }
          
         }
@@ -149,6 +150,7 @@ class boss1Game extends Phaser.Scene {
         //console.log(this.uzayliGrup.getLength());
         mermi.disableBody(true, true);
         bossSayaci--;
+        para=(oyuncuNesnesi.sahne*2)+para;
         this.bossText.text=bossSayaci;
     }
 
@@ -162,7 +164,13 @@ class boss1Game extends Phaser.Scene {
         //console.log(this.uzayliGrup.getLength());
         mermi.disableBody(true, true);
         tank.disableBody(true, true);
+        db.collection('oyuncular').doc(auth.currentUser.uid).update({
+            para:para
+        }).then(()=>{
+            
+        }) 
         setTimeout(()=>{
+            
             sahne.start('HomeGame');
         },500)
         

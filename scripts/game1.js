@@ -2,7 +2,7 @@ var game;
 
 let atesHak=tankNesnesi.sarjor;
 let uzayliSayaci=0;
-
+var para;
 
 class play1Game extends Phaser.Scene {
     constructor() {
@@ -29,6 +29,7 @@ class play1Game extends Phaser.Scene {
     create() {
         atesHak=tankNesnesi.sarjor;
         uzayliSayaci=0;
+        para=oyuncuNesnesi.para;
         
             
         this.uzayliGrup = this.physics.add.group();
@@ -114,8 +115,13 @@ class play1Game extends Phaser.Scene {
                 uzayliText.text=uzayliSayaci;
                 atesHak=tankNesnesi.sarjor;
                 mermiText.text=atesHak;
+
+                db.collection('oyuncular').doc(auth.currentUser.uid).update({
+                    para:para
+                }).then(()=>{
+                    
+                }) 
                 sahne.start('HomeGame');
-                
             }
             
             
@@ -124,7 +130,13 @@ class play1Game extends Phaser.Scene {
         this.physics.add.overlap(this.mermi, this.uzayliGrup,this.uzayliYokEt,null,this);
 
         if(uzayliSayaci==sahneNesnesi.uzayliSayisi){
+            
+            db.collection('oyuncular').doc(auth.currentUser.uid).update({
+                para:para
+            }).then(()=>{
                 this.tweenOlustur();
+            }) 
+                
              
         }
 
@@ -149,6 +161,7 @@ class play1Game extends Phaser.Scene {
         //console.log(this.uzayliGrup.getLength());
         mermi.disableBody(true, true);
         uzayliSayaci++;
+        para=oyuncuNesnesi.sahne+para;
         this.uzayliText.text=uzayliSayaci;
     }
 
