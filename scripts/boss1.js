@@ -14,7 +14,7 @@ class boss1Game extends Phaser.Scene {
             'assets/patlama.png',
             { frameWidth: 32, frameHeight: 32 }
         );
-        this.load.image("tank", "assets/tank.png");
+        this.load.image("tank", "assets/"+oyuncuNesnesi.tankTip+".png");
         this.load.image("mermi", "assets/mermi.png");
         // this.load.spritesheet('boss', 
         //     'assets/boss1.png',

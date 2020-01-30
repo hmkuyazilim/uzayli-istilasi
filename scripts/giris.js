@@ -20,7 +20,7 @@ window.onload = function () {
         dom: {
             createContainer: true
         },
-        scene: [uyeOlGame,homeGame,sahneGecisGame,play1Game,bossGecisGame,boss1Game]
+        scene: [homeGame,uyeOlGame,sahneGecisGame,play1Game,bossGecisGame,boss1Game]
     }
    
     game = new Phaser.Game(gameConfig);
@@ -36,6 +36,7 @@ class homeGame extends Phaser.Scene {
     
     preload() {
         this.load.image("baslat", "assets/baslat.png");
+        this.load.image("profil", "assets/profilResmi.png");
     }
 
     create() {
@@ -44,9 +45,35 @@ class homeGame extends Phaser.Scene {
         this.baslat = this.physics.add.sprite(game.config.width/2,game.config.height/2, "baslat");
         
         this.baslat.setInteractive().on('pointerdown', function() {
+                const resOyuncu=db.collection('oyuncular').doc(auth.currentUser.uid);
+                resOyuncu.get().then((veri)=>{
+                    let o=veri.data();
+                    oyuncuNesnesi.oyuncuBilgileriniGuncelle(o.para,o.sahne,o.tankTip);
+
+                    const resTank=db.collection('tanklar').doc(o.tankTip);
+                    resTank.get().then((veri)=>{
+                    let v=veri.data();
+                    tankNesnesi.tankBilgileriniGuncelle(v.tankHiz,v.mermiHiz,v.sarjor,v.mermiBekleme);
+                });
+            });
+
             this.scene.scene.start('SahneGecisGame');
         });
         this.girişText=this.add.text(game.config.width / 2, game.config.height/ 2, '', { fontFamily: '"Press Start 2P",cursive',fontSize:'20px' });
+
+        auth.onAuthStateChanged(k=>{
+             if(k){
+
+            }else{
+                this.profil = this.physics.add.sprite(game.config.width-30,game.config.height-30, "profil");
+
+                this.profil.setInteractive().on('pointerdown', function() {
+                    this.scene.scene.start('UyeOlGame');
+                });
+            }
+                   
+        }) 
+
         
     }
 

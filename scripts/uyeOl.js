@@ -1,9 +1,9 @@
 var game;
 var filePath='https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js';
 
-const COLOR_PRIMARY = 0x4e342e;
-const COLOR_LIGHT = 0x7b5e57;
-const COLOR_DARK = 0x260e04;
+const COLOR_PRIMARY = 0x247486;
+const COLOR_LIGHT = 0x000000;
+const COLOR_DARK = 0x000000;
 
 
 
@@ -28,17 +28,47 @@ class uyeOlGame extends Phaser.Scene {
 
     create(){
 
-        var print = this.add.text(0, 0, '');
+        let sahne=this.scene;
+       var print = this.add.text(0, 0, '');
 
        var loginDialog = CreateLoginDialog(this, {
             x: 120,
             y: 200,
-            title: 'Merhaba',
+            title: 'Mail ve Parola Giriniz',
             username: '',
             password: '',
         })
             .on('login', function (username, password) {
-                print.text += `${username}:${password}\n`;
+                auth.createUserWithEmailAndPassword(username, password).then((k)=>{
+                    console.log(k.user.uid);
+
+                    db.collection('oyuncular').doc(k.user.uid).set({
+                        tankTip:'tank1',
+                        para:0,
+                        sahne:1
+                    }).then(()=>{
+                        location.reload(); 
+                    })
+                    
+                   print.text += `${username}:${password}\n`;
+                }).catch((err)=>{
+                    if(err.code=='auth/email-already-in-use'){
+                           auth.signInWithEmailAndPassword(username, password).then(()=>{
+                            console.log(this.scene);
+                            
+                            location.reload(); 
+                            
+                        }).catch((err)=>{
+
+                            console.log(err);
+                        })
+                    }else{
+                        console.log(err.code);
+                        
+                    }
+                    
+                })
+                
             })
             .popUp(500);
       
@@ -104,7 +134,7 @@ var CreateLoginDialog = function (scene, config, onSubmit) {
     var loginButton = scene.rexUI.add.label({
         orientation: 'x',
         background: scene.rexUI.add.roundRectangle(0, 0, 10, 10, 10, COLOR_LIGHT),
-        text: scene.add.text(0, 0, 'Login'),
+        text: scene.add.text(0, 0, 'Giriş'),
         space: { top: 8, bottom: 8, left: 8, right: 8 }
     })
         .setInteractive()

@@ -10,7 +10,7 @@ class bossGecisGame extends Phaser.Scene {
     preload() {
         
         
-        this.load.image("tank", "assets/tank.png");
+        this.load.image("tank", "assets/"+oyuncuNesnesi.tankTip+".png");
         this.load.image("boss", "assets/"+sahneNesnesi.bossTip+".png");
     }
 

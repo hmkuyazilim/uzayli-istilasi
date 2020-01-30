@@ -9,7 +9,7 @@ class sahneGecisGame extends Phaser.Scene {
 
     preload() {
         
-        this.load.image("tank", "assets/tank.png");
+        this.load.image("tank", "assets/"+oyuncuNesnesi.tankTip+".png");
     }
 
     create() {
@@ -34,16 +34,6 @@ class sahneGecisGame extends Phaser.Scene {
                 uzayliNesnesi.uzayliBilgileriniGuncelle(u.uzayliHiz);
             });
         });
-
-        const resTank=db.collection('tanklar').doc('tank1');
-        resTank.get().then((veri)=>{
-                let v=veri.data();
-                tankNesnesi.tankBilgileriniGuncelle(v.tankHiz,v.mermiHiz,v.sarjor,v.mermiBekleme);
-        });
-
-        
-
-        
 
         
 
