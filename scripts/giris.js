@@ -41,7 +41,9 @@ class homeGame extends Phaser.Scene {
 
     create() {
 
-        
+        auth.onAuthStateChanged(k=>{
+            if(k){
+
         this.baslat = this.physics.add.sprite(game.config.width/2,game.config.height/2, "baslat");
         
         this.baslat.setInteractive().on('pointerdown', function() {
@@ -63,9 +65,7 @@ class homeGame extends Phaser.Scene {
         });
         this.girişText=this.add.text(game.config.width / 2, game.config.height/ 2, '', { fontFamily: '"Press Start 2P",cursive',fontSize:'20px' });
 
-        auth.onAuthStateChanged(k=>{
-             if(k){
-
+       
             }else{
                 this.profil = this.physics.add.sprite(game.config.width-30,game.config.height-30, "profil");
 
