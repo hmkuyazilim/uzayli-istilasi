@@ -10,6 +10,10 @@ class sahneGecisGame extends Phaser.Scene {
     preload() {
         
         this.load.image("tank1", "assets/tank.png");
+        this.load.spritesheet('loading', 
+            'assets/loading.png',
+            { frameWidth: 200, frameHeight: 10 }
+        );
     }
 
     create() {
@@ -40,39 +44,23 @@ class sahneGecisGame extends Phaser.Scene {
 
         this.sahneText=this.add.text(game.config.width / 4, game.config.height/ 2, 'Sahne '+this.sahneBilgisi, { fontFamily: '"Press Start 2P",cursive',fontSize:'20px' });
         this.sahneText.text='SAHNE '+this.sahneBilgisi;
-        this.tank1 = this.physics.add.sprite(game.config.width / 2,game.config.height+100, "tank1");
-        
 
+        patlamaEfektiOlustur(this.anims,'loading','loading',0,7,10);
         
+        this.loading = this.physics.add.sprite(game.config.width / 2,game.config.height/ 2+70, "loading");
 
-        this.tweenOlustur();
+        this.loading.anims.play('loading', true);
         
+        let sahne=this.scene;
+        setTimeout(()=>{
+            sahne.start('Play1Game');
+        },1000);
     }
 
     update(totalTime, deltaTime) {
-        let sahne=this.scene;
-        if (tweenKontrol==1)
-        {
-            tweenKontrol=0;
-            sahne.start('Play1Game');
+        
+            
 
-    
-        }
-    }
-    tweenOlustur(){
-        tween=this.tweens.add({
-            targets: this.tank1,
-            x:game.config.width/ 2,
-            y:game.config.height-25,
-            ease: 'Linear',
-            duration: 2000,
-            yoyo: false,
-            repeat:0,
-            onComplete:function(){
-                tweenKontrol=1;
-                
-            }
-        });
     }
 
     
