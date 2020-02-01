@@ -37,9 +37,18 @@ class homeGame extends Phaser.Scene {
     preload() {
         this.load.image("baslat", "assets/baslat.png");
         this.load.image("profil", "assets/profilResmi.png");
+        this.load.image("magaza", "assets/tank_magaza.png");
     }
 
     create() {
+
+        this.magaza = this.physics.add.sprite(game.config.width/3,game.config.height/3*2, "magaza");
+
+        this.magaza.setInteractive().on('pointerdown', function() {
+
+            console.log('magaza tıklandı');
+            
+        });
 
         auth.onAuthStateChanged(k=>{
             if(k){

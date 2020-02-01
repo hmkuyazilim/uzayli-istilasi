@@ -21,7 +21,7 @@ function loadingAnimasyonuOlustur(animasyon,key,sprite,start,end,frameRate){
         key: key,
         frames: animasyon.generateFrameNumbers(sprite, { start: start, end: end }),
         frameRate: frameRate,
-        repeat: -1
+        repeat: 0
     });
 }
 

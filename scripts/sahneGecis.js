@@ -28,6 +28,7 @@ class sahneGecisGame extends Phaser.Scene {
         console.log('sahne'+this.sahneBilgisi);
         
 
+        
         const resSahne=db.collection('sahneler').doc('sahne'+this.sahneBilgisi);
         resSahne.get().then((veri)=>{
                 let s=veri.data();
@@ -38,23 +39,26 @@ class sahneGecisGame extends Phaser.Scene {
                 let u=veri.data();
                 uzayliNesnesi.uzayliBilgileriniGuncelle(u.uzayliHiz);
             });
-        });
 
-        
-
-        this.sahneText=this.add.text(game.config.width / 4, game.config.height/ 2, 'Sahne '+this.sahneBilgisi, { fontFamily: '"Press Start 2P",cursive',fontSize:'20px' });
+            this.sahneText=this.add.text(game.config.width / 4, game.config.height/ 2, 'Sahne '+this.sahneBilgisi, { fontFamily: '"Press Start 2P",cursive',fontSize:'20px' });
         this.sahneText.text='SAHNE '+this.sahneBilgisi;
 
-        patlamaEfektiOlustur(this.anims,'loading','loading',0,7,10);
+        loadingAnimasyonuOlustur(this.anims,'loading','loading',0,7,5);
         
         this.loading = this.physics.add.sprite(game.config.width / 2,game.config.height/ 2+70, "loading");
 
         this.loading.anims.play('loading', true);
         
-        let sahne=this.scene;
-        setTimeout(()=>{
-            sahne.start('Play1Game');
-        },1000);
+
+            let sahne=this.scene;
+            setTimeout(()=>{
+                sahne.start('Play1Game');
+            },1000);
+        });
+
+        
+
+        
     }
 
     update(totalTime, deltaTime) {
