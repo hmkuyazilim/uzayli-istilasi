@@ -20,7 +20,7 @@ window.onload = function () {
         dom: {
             createContainer: true
         },
-        scene: [homeGame,uyeOlGame,sahneGecisGame,play1Game,bossGecisGame,boss1Game]
+        scene: [homeGame,tankMagazaGame,uyeOlGame,sahneGecisGame,play1Game,bossGecisGame,boss1Game]
     }
    
     game = new Phaser.Game(gameConfig);
@@ -46,7 +46,7 @@ class homeGame extends Phaser.Scene {
 
         this.magaza.setInteractive().on('pointerdown', function() {
 
-            console.log('magaza tıklandı');
+            this.scene.scene.start('TankMagazaGame');
             
         });
 
