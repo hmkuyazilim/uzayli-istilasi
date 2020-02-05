@@ -19,6 +19,7 @@ class tankMagazaGame extends Phaser.Scene {
         this.load.image("sag", "assets/sag_ok.png");
 
         this.load.image("tik", "assets/tik.png");
+        this.load.image("geri", "assets/geri.png");
 
     }
 
@@ -52,8 +53,6 @@ class tankMagazaGame extends Phaser.Scene {
                 this.scene.tankGetir(index);
             }
 
-
-
         });
 
         this.sag_ok = this.physics.add.sprite(game.config.width-20,game.config.height/2, "sag");
@@ -65,6 +64,14 @@ class tankMagazaGame extends Phaser.Scene {
                 this.scene.tankGetir(index);
 
             }
+
+        });
+
+        this.geri = this.physics.add.sprite(game.config.width-40,game.config.height-40, "geri");
+
+        this.geri.setInteractive().on('pointerdown', function() {
+
+            location.reload();
 
         });
 
